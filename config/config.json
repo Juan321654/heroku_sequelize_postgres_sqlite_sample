@@ -25,5 +25,8 @@
         "rejectUnauthorized": false
       }
     }
+  },
+  "use_env_variable": {
+    "DATABASE_URL": "postgres://rmnmbapluyucft:c8c7dc613f48200882e80ae2cd819ec33b6283eb235237a2d55560647c2795d4@ec2-3-228-222-169.compute-1.amazonaws.com:5432/d7m4off8obi4jv"
   }
 }

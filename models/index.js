@@ -11,27 +11,32 @@ const DB_URI = process.env.DATABASE_URL;
 
 let sequelize;
 if (config.use_env_variable) {
-  sequelize = new Sequelize(DB_URI, {
-    dialect: "postgres",
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
-  });
-  // sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  // sequelize = new Sequelize(DB_URI, {
+  //   dialect: "postgres",
+  //   dialectOptions: {
+  //     ssl: {
+  //       require: true,
+  //       rejectUnauthorized: false,
+  //     },
+  //   },
+  // });
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
-  sequelize = new Sequelize(DB_URI, {
-    dialect: "postgres",
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
-  });
-  // sequelize = new Sequelize(config.database, config.username, config.password, config);
+  // sequelize = new Sequelize(DB_URI, {
+  //   dialect: "postgres",
+  //   dialectOptions: {
+  //     ssl: {
+  //       require: true,
+  //       rejectUnauthorized: false,
+  //     },
+  //   },
+  // });
+  sequelize = new Sequelize(
+    config.database,
+    config.username,
+    config.password,
+    config
+  );
 }
 
 fs.readdirSync(__dirname)

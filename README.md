@@ -8,6 +8,12 @@ heroku steps:
 
 1. add `"engines": { "node": "14.x" }, ` to the `package.json`
 
-2. terminal > `heroku create app-name` >  `git init`
+2. terminal > `git init` > `heroku create app-name` 
 
 3. `git add .` > `git commit -m 'comment'` > `git push heroku master`
+
+4. `heroku ps:scale web=1`
+
+5. create `Procfile` file add `web: npm start`
+
+6. test locally to see everything is working so far `heroku local web`

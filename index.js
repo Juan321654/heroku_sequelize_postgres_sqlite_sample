@@ -6,14 +6,18 @@ const { User, Post } = require("./models");
 app.use(express.json());
 
 app.get("/users", async (req, res) => {
-  const users = await User.findAll({
-    include: [
-      {
-        model: Post,
-      },
-    ],
-  });
-  res.send(users);
+  try {
+    const users = await User.findAll({
+      include: [
+        {
+          model: Post,
+        },
+      ],
+    });
+    res.send(users);
+  } catch (error) {
+    res.status(500).send(error);
+  }
 });
 
 app.post("/users", async (req, res) => {
@@ -23,7 +27,6 @@ app.post("/users", async (req, res) => {
   //         "email": "super@email.com"
   //     }
   // }
-  
   try {
     const { user } = req.body;
     const newUser = await User.create(user);

@@ -8,7 +8,7 @@ heroku steps:
 
 1. add `"engines": { "node": "14.x" }, ` to the `package.json`
 
-2. terminal > `git init` > `heroku create app-name` 
+2. terminal > `git init` > `heroku create app-name`
 
 3. `git add .` > `git commit -m 'comment'` > `git push heroku master`
 
@@ -29,6 +29,7 @@ heroku steps:
 11. create `.env` file add `DATABASE_URL=postgres://....`
 
 12. in file > models/index.js
+
 ```
 const DB_URI = process.env.DATABASE_URL;
 
@@ -58,4 +59,15 @@ if (config.use_env_variable) {
 }
 ```
 
-13. push to heroku master
+13. file > config/config.json >
+
+```
+"production": {
+    "dialect": "postgres",
+    "use_env_variable": "DATABASE_URL"
+  }
+```
+
+14. push to heroku master
+
+15. `heroku run bash`

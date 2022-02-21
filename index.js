@@ -23,9 +23,14 @@ app.post("/users", async (req, res) => {
   //         "email": "super@email.com"
   //     }
   // }
-  const { user } = req.body;
-  const newUser = await User.create(user);
-  res.send(newUser);
+  
+  try {
+    const { user } = req.body;
+    const newUser = await User.create(user);
+    res.send(newUser);
+  } catch (error) {
+    res.status(500).send(error);
+  }
 });
 
 app.delete("/users/:id", async (req, res) => {

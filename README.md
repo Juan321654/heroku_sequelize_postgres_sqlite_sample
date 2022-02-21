@@ -17,3 +17,43 @@ heroku steps:
 5. create `Procfile` file add `web: npm start`
 
 6. test locally to see everything is working so far `heroku local web`
+
+7. git add, commit, push heroku master
+
+8. `heroku run bash`
+
+9. `heroku addons:create heroku-postgresql:hobby-dev` > creates an ENV variable with the database url
+
+10. `heroku config` > copy database url
+
+11. create `.env` file add `DATABASE_URL=postgres://....`
+
+12. in file > models/index.js
+```
+const DB_URI = process.env.DATABASE_URL;
+
+let sequelize;
+if (config.use_env_variable) {
+  sequelize = new Sequelize(DB_URI, {
+    dialect: "postgres",
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
+  });
+  // sequelize = new Sequelize(process.env[config.use_env_variable], config);
+} else {
+  sequelize = new Sequelize(DB_URI, {
+    dialect: "postgres",
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
+  });
+  // sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
+```

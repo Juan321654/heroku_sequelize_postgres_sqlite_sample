@@ -29,7 +29,7 @@ app.get("/cats", (req, res) => {
 });
 
 app.get("/pg-users", (req, res) => {
-  client.query('SELECT * FROM "Users"', (err, c_res) => {
+  client.query('SELECT * FROM users', (err, c_res) => {
     try {
       res.send(c_res.rows);
     } catch (error) {

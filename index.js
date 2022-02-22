@@ -19,14 +19,23 @@ const client = new Client({
 client.connect();
 
 app.get("/cats", (req, res) => {
-  try {
-    client.query("SELECT * FROM cats", (err, c_res) => {
-      console.log(c_res.rows)
+  client.query("SELECT * FROM cats", (err, c_res) => {
+    try {
       res.send(c_res.rows);
-    });
-  } catch (error) {
-    res.json({ error: error });
-  }
+    } catch (error) {
+      res.json({ error: error });
+    }
+  });
+});
+
+app.get("/pg-users", (req, res) => {
+  client.query('SELECT * FROM "Users"', (err, c_res) => {
+    try {
+      res.send(c_res.rows);
+    } catch (error) {
+      res.json({ error: error });
+    }
+  });
 });
 
 app.use(express.json());

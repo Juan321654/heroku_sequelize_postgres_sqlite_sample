@@ -22,7 +22,8 @@ let sequelize = new Sequelize(
   {
     host: process.env.DB_HOSTNAME,
     dialect: "postgres",
-    ssl: true
+    ssl: true,
+    native: true,
   }
 );
 

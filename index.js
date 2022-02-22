@@ -2,12 +2,38 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
 const { User, Post } = require("./models");
+require("dotenv").config();
+
+const { Client } = require("pg");
+const client = new Client({
+  user: process.env.DB_USERNAME,
+  host: process.env.DB_HOSTNAME,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: 5432,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
+
+client.connect();
+
+app.get("/cats", (req, res) => {
+  try {
+    client.query("SELECT * FROM cats", (err, c_res) => {
+      console.log(c_res.rows)
+      res.send(c_res.rows);
+    });
+  } catch (error) {
+    res.json({ error: error });
+  }
+});
 
 app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
-})
+});
 
 app.get("/users", async (req, res) => {
   try {
@@ -20,7 +46,7 @@ app.get("/users", async (req, res) => {
     });
     res.json(users);
   } catch (error) {
-    res.status(500).json(error);
+    res.json({ error: error });
   }
 });
 
@@ -34,9 +60,9 @@ app.post("/users", async (req, res) => {
   try {
     const { user } = req.body;
     const newUser = await User.create(user);
-    res.json({newUser});
+    res.json({ newUser });
   } catch (error) {
-    res.status(500).json(error);
+    res.json({ error: error });
   }
 });
 

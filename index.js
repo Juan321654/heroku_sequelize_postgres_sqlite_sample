@@ -3,6 +3,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 const { User, Post } = require("./models");
 require("dotenv").config();
+const { Sequelize } = require("sequelize");
+app.use(express.json());
 
 const { Client } = require("pg");
 const client = new Client({
@@ -15,6 +17,20 @@ const client = new Client({
     rejectUnauthorized: false,
   },
 });
+
+// const sequelize = new Sequelize(
+//   process.env.DB_NAME,
+//   process.env.DB_USERNAME,
+//   process.env.DB_PASSWORD,
+//   {
+//     host: process.env.DB_HOSTNAME,
+//     dialect: "postgres",
+//     dialectOptions: {
+//       ssl: true,
+//       rejectUnauthorized: false,
+//     },
+//   }
+// );
 
 client.connect();
 
@@ -29,7 +45,7 @@ app.get("/cats", (req, res) => {
 });
 
 app.get("/pg-users", (req, res) => {
-  client.query('SELECT * FROM users', (err, c_res) => {
+  client.query("SELECT * FROM users", (err, c_res) => {
     try {
       res.send(c_res.rows);
     } catch (error) {
@@ -37,8 +53,6 @@ app.get("/pg-users", (req, res) => {
     }
   });
 });
-
-app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -105,4 +119,12 @@ app.get("/posts", async (req, res) => {
   }
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, async () => {
+  // try {
+  //   await sequelize.authenticate();
+  //   console.log("Connection SQLIZE has been established successfully.");
+  // } catch (error) {
+  //   console.error("SQLIZE++++Unable to connect to the database:", error);
+  // }
+  console.log(`Example app listening on port ${port}!`);
+});

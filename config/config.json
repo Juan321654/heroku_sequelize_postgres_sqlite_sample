@@ -1,28 +1,14 @@
 {
   "development": {
-    "use_env_variable": "DATABASE_URL",
-    "dialect": "postgres"
+    "storage": "./users.db",
+    "dialect": "sqlite"
   },
   "test": {
-    "dialect": "postgres",
-    "use_env_variable": "DATABASE_URL",
-    "ssl": true,
-    "dialectOptions": {
-      "ssl": {
-        "require": true,
-        "rejectUnauthorized": false
-      }
-    }
+    "storage": "./users.db",
+    "dialect": "sqlite"
   },
   "production": {
-    "dialect": "postgres",
-    "use_env_variable": "DATABASE_URL",
-    "ssl": true,
-    "dialectOptions": {
-      "ssl": {
-        "require": true,
-        "rejectUnauthorized": false
-      }
-    }
+    "storage": "./users.db",
+    "dialect": "sqlite"
   }
 }

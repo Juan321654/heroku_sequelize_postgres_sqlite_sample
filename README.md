@@ -47,3 +47,24 @@ heroku steps:
 13. git add, commit, git push heroku master
 
 14. `heroku run bash` > `npx sequelize-cli db:migrate`
+
+
+**OR just use SQLite**
+
+follow up to step 8, and using the heroku bash terminal run `npx sequelize-cli db:migrate`, dont forget to change the config file to
+```
+{
+  "development": {
+    "storage": "./users.db",
+    "dialect": "sqlite"
+  },
+  "test": {
+    "storage": "./users.db",
+    "dialect": "sqlite"
+  },
+  "production": {
+    "storage": "./users.db",
+    "dialect": "sqlite"
+  }
+}
+```

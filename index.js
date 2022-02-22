@@ -18,22 +18,9 @@ const client = new Client({
   },
 });
 
-// const sequelize = new Sequelize(
-//   process.env.DB_NAME,
-//   process.env.DB_USERNAME,
-//   process.env.DB_PASSWORD,
-//   {
-//     host: process.env.DB_HOSTNAME,
-//     dialect: "postgres",
-//     dialectOptions: {
-//       ssl: true,
-//       rejectUnauthorized: false,
-//     },
-//   }
-// );
-
 client.connect();
 
+//  USING POSTGRES
 app.get("/cats", (req, res) => {
   client.query("SELECT * FROM cats", (err, c_res) => {
     try {
@@ -58,6 +45,8 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+
+// USING SEQUELIZE
 app.get("/users", async (req, res) => {
   try {
     const users = await User.findAll({

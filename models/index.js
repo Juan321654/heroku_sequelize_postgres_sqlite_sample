@@ -7,6 +7,7 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.json")[env];
 const db = {};
+require('dotenv').config();
 
 // let sequelize;
 // if (config.use_env_variable) {
@@ -14,12 +15,18 @@ const db = {};
 // } else {
 //   sequelize = new Sequelize(config.database, config.username, config.password, config);
 // }
-let sequelize = new Sequelize(
-  "postgres://rmnmbapluyucft:c8c7dc613f48200882e80ae2cd819ec33b6283eb235237a2d55560647c2795d4@ec2-3-228-222-169.compute-1.amazonaws.com:5432/d7m4off8obi4jv",
-  {
-    dialect: "postgres",
+let sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: "postgres",
+  protocol: "postgres",
+  ssl: true,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    }
+
   }
-);
+});
 
 fs.readdirSync(__dirname)
   .filter((file) => {

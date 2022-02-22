@@ -18,9 +18,9 @@ app.get("/users", async (req, res) => {
         },
       ],
     });
-    res.send(users);
+    res.json(users);
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).json(error);
   }
 });
 
@@ -34,9 +34,9 @@ app.post("/users", async (req, res) => {
   try {
     const { user } = req.body;
     const newUser = await User.create(user);
-    res.send(newUser);
+    res.json({newUser});
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).json(error);
   }
 });
 

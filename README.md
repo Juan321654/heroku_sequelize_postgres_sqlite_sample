@@ -12,15 +12,13 @@ heroku steps:
 
 2. terminal > `git init` > `heroku create app-name`
 
-3. `git add .` > `git commit -m 'comment'` > `git push heroku master` > `git remote -v` to check current gits
+3. create `Procfile` file add `web: npm start`
 
-4. `heroku ps:scale web=1`
+4. `git add .` > `git commit -m 'comment'` > `git push heroku master` >>> `git remote -v` to check current gits
 
-5. create `Procfile` file add `web: npm start`
+5. `heroku ps:scale web=1`
 
 6. test locally to see everything is working so far `heroku local web`
-
-7. git add, commit, git push heroku master
 
 8. `heroku run bash` to see files are uploaded > `exit`
 

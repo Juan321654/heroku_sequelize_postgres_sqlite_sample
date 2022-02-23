@@ -18,7 +18,7 @@ heroku steps:
 
 5. `heroku ps:scale web=1`
 
-6. test locally to see everything is working so far `heroku local web`
+6. test locally to see everything is working so far `heroku local`
 
 8. `heroku run bash` to see files are uploaded > `exit`
 

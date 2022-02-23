@@ -12,7 +12,7 @@ heroku steps:
 
 2. terminal > `git init` > `heroku create app-name`
 
-3. `git add .` > `git commit -m 'comment'` > `git push heroku master`
+3. `git add .` > `git commit -m 'comment'` > `git push heroku master` > `git remote -v` to check current gits
 
 4. `heroku ps:scale web=1`
 
@@ -53,7 +53,10 @@ heroku steps:
 
 **OR just use SQLite**
 
-follow up to step 8, and using the heroku bash terminal run `npx sequelize-cli db:migrate`, dont forget to change the config file to
+- if the `sqlite.db` was uploaded already there is no need to run any `npx sequelize-cli` commands
+- you only have to do until step `7` 
+- dont forget to change the config file to
+
 ```
 {
   "development": {

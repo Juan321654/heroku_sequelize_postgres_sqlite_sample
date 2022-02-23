@@ -8,7 +8,7 @@ basically treat the `migrations` as if it was the raw SQL, the `models` seems to
 
 heroku steps:
 
-1. add `"engines": { "node": "16.x" }, ` to the `package.json`
+1. add `"engines": { "node": "14.x" }, ` to the `package.json` (seems like for now v14 is best for sqlite compability)
 
 2. terminal > `git init` > `heroku create app-name`
 
